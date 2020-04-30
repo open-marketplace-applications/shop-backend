@@ -1,5 +1,7 @@
 const paymentModule = require('iota-payment')
 const app = require('express')()
+const cors = require('cors');
+app.use(cors());
 
 const SHOP_NAME = process.env.NAME || 'your shop';
 const SHOP_DESCRIPTION = process.env.DESCRIPTION || 'Shop Application by Open Marketplace Applications';
