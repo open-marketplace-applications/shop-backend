@@ -1,8 +1,11 @@
 const paymentModule = require('iota-payment')
 const app = require('express')()
 
+const SHOP_NAME = process.env.NAME || 'your shop';
+const SHOP_DESCRIPTION = process.env.DESCRIPTION || 'Shop Application by Open Marketplace Applications';
+
 app.get("/", (req, res) => {
-    res.send('hello world from shop backend!');
+    res.json({ name: SHOP_NAME, description: SHOP_DESCRIPTION })
 });
 
 let options = {
