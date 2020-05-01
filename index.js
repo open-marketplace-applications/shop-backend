@@ -82,6 +82,12 @@ app.get('/pdfs', (req, res) => {
     res.json({ pdfs: files })
 });
 
+//get all pdf names
+app.get('/products', (req, res) => {
+    let products = require('./products/sample.json')
+    res.json({ products: products })
+});
+
 //create a payment for a pdf
 app.post('/payment', (req, res) => {
     var jsonString = '';

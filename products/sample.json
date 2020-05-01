@@ -1,0 +1,16 @@
+[
+    {
+        "id": "bd395b83-1c53-41ee-b8d5-8f5329ecbc41",
+        "name": "A Sample PDF",
+        "price": 0,
+        "type": "download",
+        "kind": "pdf"
+    },
+    {
+        "id": "e8681db9-bb84-4182-b345-e1068b45f557",
+        "name": "dummy",
+        "price": 0,
+        "type": "download",
+        "kind": "pdf"
+    }
+]
