@@ -1,5 +1,6 @@
 const paymentModule = require('iota-payment')
-const app = require('express')()
+const express = require('express')
+const app = express()
 const fs = require('fs');
 const cors = require('cors');
 app.use(cors());
