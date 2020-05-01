@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Payment module</title>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <style>
+    body {
+      background-color: rgb(34, 37, 39);
+      color: white;
+      padding: 70px;
+      font-size: 110%;
+      font-family: 'Nunito Sans', sans-serif;
+    }
+
+    button,
+    input[type="submit"] {
+      font-family: 'Nunito Sans', sans-serif;
+      -webkit-transition-duration: 0.4s;
+      transition-duration: 0.4s;
+      border: none;
+      padding: 4px 8px;
+    }
+
+    button:hover,
+    input[type="submit"]:hover {
+      background-color: rgb(112, 112, 112);
+    }
+
+    #address {
+      visibility: hidden;
+    }
+
+    a {
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <form id="payment" action="/payment" method="post">
+    <label>PDF: </label>
+    <select id="pdflist" form="payment"></select>
+    <span>Price: 10i</span>
+    <input class="buy" class="update_form" type="submit" value="Buy pdf">
+  </form>
+  <a href="" id="address">Address</a>
+  <br>
+  <div id="downloads"></div>
+</body>
+
+<script>
+  let url = 'http://localhost:5000'
+
+  //send paymentIDs every 5 seconds to check if they got confirmed and access is granted
+  authenticate()
+   setInterval(() => {
+     authenticate()
+  }, 5000);
+
+  //get available pdfs and add them to the field to select them
+  fetch(url + '/pdfs')
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+      for (pdfName of data.pdfs) {
+        let ul = document.getElementById("pdflist");
+        let li = document.createElement("option");
+        li.setAttribute("value", pdfName)
+        li.innerText = pdfName
+        ul.appendChild(li);
+      }
+    })
+
+  //send form to get an IOTA address
+  $('form').on('submit', (e) => {
+    let formelement = document.getElementById("pdflist");
+    let strUser = formelement.options[formelement.selectedIndex].text;
+    e.preventDefault();
+    $.ajax({
+      type: 'post',
+      url: url + '/payment',
+      data: JSON.stringify({ pdfName: strUser }),
+      success: (data) => {
+        console.log(data);
+        //display address
+        document.getElementById("address").innerText = data.address
+        document.getElementById("address").setAttribute("href", 'https://comnet.thetangle.org/address/' + data.address)
+        document.getElementById("address").setAttribute("rel", 'noopener noreferrer')
+        document.getElementById("address").setAttribute("target", '_blank')
+        document.getElementById("address").style.visibility = 'visible'
+        //add paymentId
+        let oldIds
+        try {
+          oldIds = JSON.parse(localStorage.paymentIds)
+        } catch (err) {}
+        if (typeof oldIds == 'undefined') {
+          localStorage.setItem("paymentIds", JSON.stringify([data.id]))
+        } else {
+          localStorage.setItem("paymentIds", JSON.stringify([data.id, ...oldIds]))
+        }
+      }
+    });
+  });
+
+  //array to store pdf names you have access to, is used to check that you don't display the same download link multiple times
+  let downloads = []
+  //send payments to check if download is allowed
+  function authenticate() {
+    if (typeof localStorage.paymentIds != 'undefined') {
+      let paymentIds = JSON.parse(localStorage.paymentIds)
+      $.ajax({
+        type: 'post',
+        url: url + '/authenticate',
+        data: JSON.stringify({ paymentIds: paymentIds }),
+        success: (data) => {
+          console.log(data);
+          for (r of data) {
+            if(r[Object.keys(r)] == "Authenticated!"){
+              let pdfname = Object.keys(r)[0]
+              //check if not already there
+              if(downloads.indexOf(pdfname) == -1){
+                downloads.push(pdfname)
+                adddownloadelement(pdfname)
+              }
+            }
+          }
+        }
+      })
+    }
+  }
+
+  //create download links for a pdf
+  function adddownloadelement(pdfname) {
+      let downloadelement = document.createElement("download");
+      downloadelement.innerHTML = `  <div id=\'paid\'>\r\n    <br>\r\n    <a href=\"${url}\/download\/${pdfname}\" class=\"button\" download><i class=\"fa fa-download\"><\/i>Download\r\n      pdf<\/a>\r\n    <br>\r\n    <a href=\"${url}\/download\/${pdfname}\" rel=\"noopener noreferrer\" target=\"_blank\">Open pdf in Browser\r\n      ${pdfname}<\/a>\r\n  <\/div>`
+      document.getElementById("downloads").append(downloadelement);
+    }
+</script>
+
+</html>
