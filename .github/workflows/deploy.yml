@@ -1,11 +1,11 @@
 
 name: DeployWebhook
-    on:
-      push:
-        branches: [ master ]
-      pull_request:
-        branches: [ master ]
-    uses: joelwmale/webhook-action@master
-    env:
-      WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
-      data: "{'deployment': 'start', 'project': 'shop-backend'}"
+  on:
+    push:
+      branches: [ master ]
+    pull_request:
+      branches: [ master ]
+  uses: joelwmale/webhook-action@master
+  env:
+    WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+    data: "{'deployment': 'start', 'project': 'shop-backend'}"
