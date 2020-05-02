@@ -109,6 +109,7 @@ app.post('/payment', (req, res) => {
 
 //use the files from the public folder for the main page
 app.use(express.static('public/'));
+app.use('/docs', express.static('docs'));
 
 let options = {
     api: true,
