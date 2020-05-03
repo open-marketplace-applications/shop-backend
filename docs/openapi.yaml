@@ -6,23 +6,13 @@ servers:
     description: Sandbox server
 info:
   description: |
-    This is a sample server Petstore server.
-    You can find out more about Swagger at
-    [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).
-    For this sample, you can use the api key `special-key` to test the authorization filters.
+    This is the documentaiton page for the Open Marketplace Applications Shop Backend server.
 
     # Introduction
-    This API is documented in **OpenAPI format** and is based on
-    [Petstore sample](http://petstore.swagger.io/) provided by [swagger.io](http://swagger.io) team.
-    It was **extended** to illustrate features of [generator-openapi-repo](https://github.com/Rebilly/generator-openapi-repo)
-    tool and [ReDoc](https://github.com/Redocly/redoc) documentation. In addition to standard
-    OpenAPI syntax we use a few [vendor extensions](https://github.com/Redocly/redoc/blob/master/docs/redoc-vendor-extensions.md).
+    Open marketplace apps are decentralised open source apps for smart cities and local communities.
 
     # OpenAPI Specification
-    This API is documented in **OpenAPI format** and is based on
-    [Petstore sample](http://petstore.swagger.io/) provided by [swagger.io](http://swagger.io) team.
-    It was **extended** to illustrate features of [generator-openapi-repo](https://github.com/Rebilly/generator-openapi-repo)
-    tool and [ReDoc](https://github.com/Redocly/redoc) documentation. In addition to standard
+    This API is documented in **OpenAPI format**. In addition to standard
     OpenAPI syntax we use a few [vendor extensions](https://github.com/Redocly/redoc/blob/master/docs/redoc-vendor-extensions.md).
 
     # Cross-Origin Resource Sharing
@@ -32,7 +22,7 @@ info:
 
     # Authentication
 
-    Petstore offers two forms of authentication:
+    The #OMA Shop offers two forms of authentication:
       - API Key
       - OAuth2
     OAuth2 - an open protocol to allow secure authorization in a simple
@@ -41,15 +31,15 @@ info:
     <SecurityDefinitions />
 
   version: 1.0.0
-  title: Swagger Petstore
-  termsOfService: 'http://swagger.io/terms/'
+  title: Shop - Open Marketplace Applications
+  termsOfService: 'https://openmarketplace.org/terms/'
   contact:
-    name: API Support
-    email: apiteam@swagger.io
+    name: Shop Support
+    email: support-shop@openmarketplace.org
     url: https://github.com/Redocly/redoc
   x-logo:
-    url: 'https://redocly.github.io/redoc/petstore-logo.png'
-    altText: Petstore logo
+    url: 'https://github.com/open-marketplace-applications/shop-backend/blob/master/public/oma.jpg?raw=true'
+    altText: Oma logo
   license:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
