@@ -5,16 +5,15 @@
   <a href="https://openmarketplace.org/">
      <img
       alt="open marketplace apps"
-      src="./public/oma.jpg"
-      width="100"
+      src="./public/logo.svg"
+      width="150"
     />
   </a>
 </p>
 
+<h1 align="center"><a href="https://openmarketplace.org"> Open Marketplace Apps</a></h1>
 
-<h1 align="center"><a href="https://openmarketplace.org/shop"> Open Marketplace Shop</a></h1>
-
-<p align="center">Open marketplace apps are decentralised open source apps for smart cities and local communities. </p>
+<p align="center">Open marketplace apps are decentralized open source apps for smart cities and local communities.</p>
 
 <p align="center">
   <a title="MIT License" href="LICENSE">
@@ -23,11 +22,12 @@
   <a title="Follow on Twitter" href="https://twitter.com/marketplace_org">
     <img src="https://img.shields.io/twitter/follow/marketplace_org.svg?style=social&label=Follow%20@marketplace_org">
   </a>
-  <br>
-  <br>
 </p>
 
-# Open Marketplace Shop Backend
+---
+
+
+# Shop Backend
 
 **Demo:** [http://shop-demo.nest.openmarketplace.org](https://shop-demo.nest.openmarketplace.org)
 
